@@ -2,7 +2,10 @@
   <h2>
     <%= event.location %>
   </h2>
-
+  <p>
+    <strong>Event Organizer:</strong>
+    <%= event.creator.email %>
+  </p>
   <p>
     <strong>Date:</strong>
     <%= event.date.strftime("%m/%d/%Y") %>
