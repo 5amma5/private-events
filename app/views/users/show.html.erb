@@ -1,13 +1,15 @@
-<h1><%= @user.email %>'s Created Events:</h1>
+<%= render 'events/account' %>
+<br>
+<h1><%= @user.email %>'s Profile</h1>
+<h2>Created Events:</h2>
 
 <% @user.created_events.each do |event| %>
   <%= render event %> <br>
 <% end %>
 <br>
-<% if user_signed_in? %>
-  <div>Currently signed in as <%= current_user.email %> </div>
-  <div> <%= link_to "Sign Out", destroy_user_session_url %> </div>
-<% else %>
-  <div> <%= link_to "Sign In", new_user_session_path %> | 
-  <%= link_to "Sign Up", new_user_registration_path %></div>
-<% end %>
+<h2>Attended Events:</h2>
+<ul>
+  <% @user.attended_events.order(:date).each do |event| %>
+    <li><%= event.location %> | Date: <%= event.date.strftime("%m/%d/%Y")%></li>
+  <% end %>
+</ul>

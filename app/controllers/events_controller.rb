@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+
   def index
     @events = Event.all
   end
@@ -16,7 +18,7 @@ class EventsController < ApplicationController
     @event = current_user.created_events.build(event_params)
 
     if @event.save
-      flash[:success] = "Event created!"
+      flash[:notice] = "Event created!"
       redirect_to @event
     else
       render :new, :unprocessable_entity

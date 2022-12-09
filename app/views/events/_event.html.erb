@@ -1,15 +1,14 @@
 <div id="<%= dom_id event %>">
   <h2>
-    <%= event.location %>
+    <%= link_to event.location, event %>
   </h2>
 
   <p>
     <strong>Event Organizer:</strong>
-    <%= event.creator.email %>
+    <%= link_to event.creator.email, event.creator %>
   </p>
   <p>
     <strong>Date:</strong>
     <%= event.date.strftime("%m/%d/%Y") %>
   </p>
-  <p> <%= link_to "View Event", event_path(event) %> </p>
 </div>
