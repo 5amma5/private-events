@@ -16,6 +16,6 @@ class Event < ApplicationRecord
   # end
 
   # Refactored class methods into scopes
-  scope :upcoming, -> { where(date: (Time.now)..).order(:date) }
-  scope :past, -> { where(date: ..(Time.now)).order(date: :desc) }
+  scope :upcoming, -> { where(date: (Time.now)..) }
+  scope :past, -> { where(date: ..(Time.now)) }
 end
