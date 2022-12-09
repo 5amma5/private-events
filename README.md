@@ -5,7 +5,6 @@ This is part of the Advanced Forms and Active Records section in The Odin Projec
 
 ## Instructions
 
-
 Setup
 
   1.  Think about and spec out how to set up your data models for this application.
@@ -41,3 +40,9 @@ Finishing Touches
   5.  Extra Credit: Allow users to remove themselves as an attendee to their “attended_events”.
   6.  Extra Credit: Make each event private and add the functionality for the event creator to invite specific users to an event.
 
+## Future Improvements
+
+- Add various validations. i.e - prevent the ability to attend a past event
+- Add CSS and refactor HTML
+- Do Extra Credit: Make each event private and add the functionality for the event creator to invite specific users to an event.
+- Add name or username column to User table and use that to display in views instead of email

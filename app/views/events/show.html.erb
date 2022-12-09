@@ -1,7 +1,6 @@
-<%= render 'account' %>
-<br>
-<div><%= link_to "View All Events", events_path %></div>
-<br>
+<%= render 'account' %><br>
+
+<div><%= link_to "View All Events", events_path %></div><br>
 
 <div id="events">
   <div>
@@ -17,11 +16,7 @@
       <%= @event.date.strftime("%m/%d/%Y") %>
     </p>
   </div>
-    <%# Give users a button that when clicked, it registers them to attend
-      Rules:
-      1. Only logged in users can attend
-      2. Need to prevent duplicate (user + event) entries. Use logic to show different buttons Attend & 
-  %>
+
   <% if user_signed_in? %>
     <% if current_user.attended_events.include?(@event) %>
       <div><%= render 'unattend' %></div>
@@ -29,18 +24,18 @@
       <div><%= render 'attend' %></div>
     <% end %>
   <% else %>
-    <p>Let us know you're attending by <%= link_to 'logging in', new_user_session_path %>.</p>
+    <p><%= button_to 'Login', new_user_session_path %> to let us know you're attending.</p>
   <% end %>
 </div>
 
 <h2>Guest List</h2>
-<div><%= @event.attendees.count %> people are on the guest list:</div>
 <% if @event.attendees.any? %>
+  <div><%= pluralize(@event.attendees.count, "attendee") %>:</div>
   <ul>
     <% @event.attendees.order(:email).each do |attendee| %>
       <li><%= attendee.email %></li>
     <% end %>
   </ul>
 <% else %>
-  <p> No one has </p>
+  <p> This event currently has no one registered to attend. </p>
 <% end %>
