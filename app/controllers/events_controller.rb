@@ -24,7 +24,7 @@ class EventsController < ApplicationController
       render :new, :unprocessable_entity
     end
   end
-  
+
   private
 
   def event_params

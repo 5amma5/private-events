@@ -6,4 +6,16 @@ class Event < ApplicationRecord
   has_many :attendees, through: :event_attendances, source: :event_attendee
   
   belongs_to :creator, class_name: "User"
+
+  # Create class methods to separate Events by upcoming and past
+  # def self.upcoming
+  #   @upcoming = Event.where(date: (Time.now)..).order(:date)
+  # end
+  # def self.past
+  #   @past = Event.where(date: ..(Time.now)).order(date: :desc)
+  # end
+
+  # Refactored class methods into scopes
+  scope :upcoming, -> { where(date: (Time.now)..).order(:date) }
+  scope :past, -> { where(date: ..(Time.now)).order(date: :desc) }
 end
