@@ -7,9 +7,17 @@
   <%= render event %> <br>
 <% end %>
 <br>
-<h2>Attended Events:</h2>
+<h2>Event Attendance</h2>
+<h3>Upcoming Events to Attend:</h3>
 <ul>
-  <% @user.attended_events.order(:date).each do |event| %>
-    <li><%= event.location %> | Date: <%= event.date.strftime("%m/%d/%Y")%></li>
+  <% @user.attended_events.where(date: (Time.now)..).order(:date).each do |event| %>
+      <li><%= event.location %> | Date: <%= event.date.strftime("%m/%d/%Y")%></li>
+  <% end %>
+</ul>
+<br>
+<h3>Past Events Attended:</h3>
+<ul>
+  <% @user.attended_events.where(date: ..(Time.now)).order(:date).each do |event| %>
+      <li><%= event.location %> | Date: <%= event.date.strftime("%m/%d/%Y")%></li>
   <% end %>
 </ul>
