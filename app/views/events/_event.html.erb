@@ -2,6 +2,7 @@
   <h2>
     <%= event.location %>
   </h2>
+
   <p>
     <strong>Event Organizer:</strong>
     <%= event.creator.email %>
@@ -10,4 +11,5 @@
     <strong>Date:</strong>
     <%= event.date.strftime("%m/%d/%Y") %>
   </p>
+  <p> <%= link_to "View Event", event_path(event) %> </p>
 </div>

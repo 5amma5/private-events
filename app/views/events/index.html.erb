@@ -9,7 +9,11 @@
 <br>
 
 <% if user_signed_in? %>
-  <div> <%= link_to "Sign Out", destroy_user_session_url %> </div>
+
+  <div>
+    Currently Signed in as: <%= current_user.email %>  | 
+    <%= link_to "Sign Out", destroy_user_session_url %>
+    </div>
 <% else %>
   <div> <%= link_to "Sign In", new_user_session_path %> | 
   <%= link_to "Sign Up", new_user_registration_path %></div>

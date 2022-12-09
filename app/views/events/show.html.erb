@@ -1,6 +1,58 @@
+
 <div id="events">
-    <%= render "event", event: @event %>
+  <div>
+    <h2>
+      <%= @event.location %>
+    </h2>
+    <p>
+      <strong>Event Organizer:</strong>
+      <%= @event.creator.email %>
+    </p>
+    <p>
+      <strong>Date:</strong>
+      <%= @event.date.strftime("%m/%d/%Y") %>
+    </p>
+  </div>
+    <%# Give users a button that when clicked, it registers them to attend
+      Rules:
+      1. Only logged in users can attend
+      2. Need to prevent duplicate (user + event) entries. Use logic to show different buttons Attend & 
+  %>
+  <% if user_signed_in? %>
+    <% if current_user.attended_events.include?(@event) %>
+      <div><%= button_to 'Unattend Event', event_attendance_path, method: :delete %></div>
+    <% else %>
+      <div>
+        <%= form_with model: @attendance do |form| %>
+          <%= form.hidden_field :attended_event_id, :value => @event.id %>
+          <%= form.hidden_field :event_attendee_id, :value => current_user.id %>
+          <%= form.submit 'Attend Event' %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Let us know you're attending by <%= link_to 'logging in', new_user_session_path %>.</p>
+  <% end %>
 </div>
 
-<div><%= link_to "Create New Event", new_event_path %></div>
+
+<!-- <div>
+  <%#= form_with model: @event_attendance do |form| %>
+    <%#= form.hidden_field :event_attendee_id, current_user.id %> 
+    <%#= form.hidden_field :attended_event_id, @event.id %>
+    <%#= form.submit %>
+  <%# end %>
+</div> -->
+
+<% if user_signed_in? %>
+  <div>Currently Signed in as: <%= current_user.email %></div>
+  <div>    
+    <%= link_to "Create New Event", new_event_path %> | 
+    <%= link_to "Sign Out", destroy_user_session_url %>
+  </div>
+<% else %>
+  <div> <%= link_to "Sign In", new_user_session_path %> | 
+  <%= link_to "Sign Up", new_user_registration_path %></div>
+<% end %>
+<br>
 <div><%= link_to "View All Events", events_path %></div>

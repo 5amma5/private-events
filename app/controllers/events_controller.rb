@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @attendance = EventAttendance.new
     @event = Event.find(params[:id])
   end
 
@@ -18,14 +19,13 @@ class EventsController < ApplicationController
       flash[:success] = "Event created!"
       redirect_to @event
     else
-      flash[:error] = "Something went wrong"
-      render :new
+      render :new, :unprocessable_entity
     end
   end
   
   private
-    def event_params
-      params.require(:event).permit(:location, :date)
-    end
-  
+
+  def event_params
+    params.require(:event).permit(:location, :date)
+  end
 end
